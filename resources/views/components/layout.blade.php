@@ -22,27 +22,13 @@
         </style>
     </head>
     <body class="antialiased flex flex-col min-h-screen">
-        <header class="px-6 py-8 sticky top-0 left-0 w-full border-12 border-b border-solid">
-            <nav class="md:flex md:justify-between md:items-center">
-                <div><a href="/" class="text-xl font-bold uppercase">Home</a></div>
-                <div class="mt-8 md:mt-0">
-                    {{-- <a href="/register" class="ml-3 text-xs font-bold uppercase">Register</a>
-                    <a href="/login" class="ml-3 text-xs font-bold uppercase">Log In</a> --}}
-                    <a href="/projects" class="text-s font-bold uppercase mr-3">Projects</a>
-                    <a href="/about" class="text-s font-bold uppercase">About</a>
-                </div>
-            </nav>
-        </header>
+        <x-header />
 
-        <main class="flex flex-col flex-1">
+        {{-- <main class="flex flex-col flex-1 bg-gray-700 -z-40"> --}}
+        <main class="flex flex-col flex-1 bg-gray-700">
             {{ $content }}
         </main>
 
-        <footer class="h-16 border-12 border-t border-solid mr-12 flex justify-end items-center">
-            {{-- <nav class="flex md:flex md:justify-end mr-5 md:items-center font-black"> --}}
-            <nav class="font-black">
-                Tony Kieling &copy — 2023
-            </nav>
-        </footer>
+        <x-footer />
     </body>
 </html>
