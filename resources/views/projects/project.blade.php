@@ -13,7 +13,9 @@
             </div>
 
             <div class="mt-20">
-                <x-projects.project-card :project="$project" :showBody="true" />
+                <div class="w-1/2 m-auto">
+                    <x-projects.project-card :project="$project" :showBody="true" />
+                </div>
             </div>
         </div>
     </x-slot>
