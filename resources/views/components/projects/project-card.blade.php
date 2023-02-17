@@ -1,4 +1,4 @@
-@props(['project', 'showBody' => false])
+@props(['project', 'showBody' => false, "isAdmin" => false])
 
 <div class="p-6 m-6 bg-white overflow-hidden shadow sm:rounded-lg flex flex-col justify-between">
     <div>
@@ -7,9 +7,6 @@
         </div>
         
         @if ($showBody)
-            <div class="flex justify-center px-12 py-3">
-                <img src="{{url('storage/images/projects.png')}}" />
-            </div>
             <div class="[&>p]:pt-4">
                 {!! $project->body !!}
             </div>

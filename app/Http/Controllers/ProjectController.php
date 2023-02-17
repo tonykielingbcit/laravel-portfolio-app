@@ -11,8 +11,8 @@ class ProjectController extends Controller
     public function index()
     {
         return view('projects.index')
-        ->with('projects', Project::all())
-        ->with("showBackToProjects", false);
+            ->with('projects', Project::all())
+            ->with("showBackToProjects", false);
     }
 
     

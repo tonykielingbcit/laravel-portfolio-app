@@ -5,7 +5,11 @@
             <a href="/" class="text-xl font-bold uppercase">Home</a>
 
             @auth
-                <a href="/projects" class="text-m font-bold uppercase ml-6">Projects</a>
+                @if (auth()->user()->isAdmin())
+                    <a href="/admin/projects" class="text-m font-bold uppercase ml-6">Projects</a>
+                @else    
+                    <a href="/projects" class="text-m font-bold uppercase ml-6">Projects</a>
+                @endif
             @endauth
 
             <a href="/about" class="text-m font-bold uppercase ml-6">About</a>
@@ -17,7 +21,7 @@
                 <span class="text-m font-bold uppercase"> {{ auth()->user()->name }} </span>
 
                 @if (auth()->user()->isAdmin())
-                    <a href="/admin/projects" class="text-m font-bold uppercase ml-6">Admin</a>
+                    <a href="/admin" class="text-m font-bold uppercase ml-6">Admin</a>
                 @endif
 
                 <a href="/logout" class="ml-6 text-m font-bold uppercase">Logout</a>
