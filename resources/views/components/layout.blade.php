@@ -25,13 +25,13 @@
         <x-header />
 
         @if (session()->has('success'))
-            <div class="flex justify-center items-center bg-gray-100 w-full py-3">
+            <div class="flex justify-center items-center bg-gray-700 w-full py-3">
                 <p class="text-xs font-bold bg-white uppercase border border-green-900 rounded px-4 py-2">
                     {{ session()->get('success') }}
                 </p>
             </div>
         @elseif (session()->has('error'))
-            <div class="flex justify-center items-center bg-gray-100 w-full py-3">
+            <div class="flex justify-center items-center bg-gray-700 w-full py-3">
                 <p class="text-xs color-red-500 font-bold bg-white uppercase border border-red-900 rounded px-4 py-2">
                     {{ session()->get('error') }}
                 </p>

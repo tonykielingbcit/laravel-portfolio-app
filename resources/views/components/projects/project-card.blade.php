@@ -7,7 +7,13 @@
         </div>
         
         @if ($showBody)
-            <div class="[&>p]:pt-4">{!! $project->body !!}</div>
+            <div class="flex justify-center px-12 py-3">
+                <img src="{{url('storage/images/projects.png')}}" />
+            </div>
+            <div class="[&>p]:pt-4">
+                {!! $project->body !!}
+            </div>
+
         @else
             <div>{!! $project->excerpt !!}</div>
         @endif
