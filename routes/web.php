@@ -19,7 +19,8 @@ use App\Http\Controllers\RegisterUserController;
 
 Route::get('/', [ProjectController::class, 'index']);
 Route::get('/about', [ProjectController::class, 'about']);
-Route::get('/projects', [ProjectController::class, 'index'])->middleware("auth");
+// Route::get('/projects', [ProjectController::class, 'index'])->middleware("auth");
+Route::get('/projects', [ProjectController::class, 'index']);
 Route::get('/projects/{project:slug}', [ProjectController::class, 'show'])->middleware("auth");
 Route::get('/categories/{category:slug}', [ProjectController::class, 'listByCategory'])->middleware("auth");
 
@@ -31,11 +32,17 @@ Route::post('/login', [SessionController::class, 'store'])->middleware("guest");
 
 Route::get('/logout', [SessionController::class, 'destroy'])->middleware('auth');
 
+
 // Route::get('/admin/projects', [ProjectController::class, 'index'])->middleware('admin');
 Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/admin/projects/create', [ProjectController::class, 'create']);
+    Route::post('/admin/projects/create', [ProjectController::class, 'store']);
     Route::get('/admin', [AdminController::class, 'index']);
     Route::get('/admin/projects', [AdminController::class, 'projects']);
     Route::get('/admin/projects/{project:slug}', [AdminController::class, 'showProject']);
+    Route::get('/admin/projects/{project}/edit', [ProjectController::class, 'edit']);
+    Route::patch('/admin/projects/{project}/edit', [ProjectController::class, 'update']);
+    Route::delete('/admin/projects/{project}/delete', [ProjectController::class, 'destroy']);
 });
 
 Route::fallback(function() {

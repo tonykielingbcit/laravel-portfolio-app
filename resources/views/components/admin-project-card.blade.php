@@ -11,7 +11,8 @@
         <div class="flex flex-col w-1/3">
             <div>
                 <div class="flex justify-center pt-8">
-                    <img src="{{url('storage/images/projects.png')}}" />
+                    @php($temp = $project->thumb ?? "images/thumb-default.png")
+                    <img src="{{ url('storage/'.$temp) }}" class="flex items-center justify-center w-1/2" />
                 </div>
             </div>
             <div class="mt-8">

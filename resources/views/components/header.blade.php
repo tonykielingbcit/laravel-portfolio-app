@@ -4,15 +4,16 @@
         <div>
             <a href="/" class="text-xl font-bold uppercase">Home</a>
 
-            @auth
-                @if (auth()->user()->isAdmin())
+            {{-- @auth
+                @if (auth()->user()->isAdmin()) --}}
                     <a href="/admin/projects" class="text-m font-bold uppercase ml-6">Projects</a>
-                @else    
+                {{-- @else    
                     <a href="/projects" class="text-m font-bold uppercase ml-6">Projects</a>
-                @endif
-            @endauth
+                @endif --}}
+            {{-- @endauth --}}
 
             <a href="/about" class="text-m font-bold uppercase ml-6">About</a>
+            {{-- <a href="/admin/projects/create" class="text-m font-bold uppercase ml-6">Create Project</a> --}}
 
         </div>
         
