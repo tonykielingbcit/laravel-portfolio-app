@@ -49,13 +49,19 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::post('/admin/categories/create', [CategoryController::class, 'store']);
     Route::get('/admin/categories/{category}/edit', [CategoryController::class, 'edit']);
     Route::patch('/admin/categories/{category}/edit', [CategoryController::class, 'update']);
-    Route::delete('/admin/categories/{category}delete', [CategoryController::class, 'destroy']);
+    Route::delete('/admin/categories/{category}/delete', [CategoryController::class, 'destroy']);
 
     Route::get('/admin/tags/create', [TagController::class, 'create']);
     Route::post('/admin/tags/create', [TagController::class, 'store']);
     Route::get('/admin/tags/{tag}/edit', [TagController::class, 'edit']);
     Route::patch('/admin/tags/{tag}/edit', [TagController::class, 'update']);
     Route::delete('/admin/tags/{tag}/delete', [TagController::class, 'destroy']);
+
+    Route::get('/admin/users/create', [RegisterUserController::class, 'createByAdmin']);
+    Route::post('/admin/users/create', [RegisterUserController::class, 'store']);
+    Route::get('/admin/users/{user}/edit', [RegisterUserController::class, 'edit']);
+    Route::patch('/admin/users/{user}/edit', [RegisterUserController::class, 'update']);
+    Route::delete('/admin/users/{user}/delete', [RegisterUserController::class, 'destroy']);
 
     Route::get('/admin', [AdminController::class, 'index']);
     Route::get('/admin/projects', [AdminController::class, 'projects']);
