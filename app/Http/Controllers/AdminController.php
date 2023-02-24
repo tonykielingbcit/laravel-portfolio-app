@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Tag;
 use App\Models\User;
 use App\Models\Project;
 use App\Models\Category;
@@ -14,6 +15,7 @@ class AdminController extends Controller
             ->with('projects', Project::all())
             ->with('users', User::all())
             ->with("categories", Category::all())
+            ->with("tags", Tag::all())
             ->with("showBackToProjects", false);
     }
 

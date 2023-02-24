@@ -1,4 +1,4 @@
-<header class="px-6 py-5 sticky top-0 left-0 w-full border-12 border-b border-solid bg-gray-400">
+<header class="px-6 py-5 top-0 left-0 w-full border-12 border-b border-solid bg-gray-400">
     <nav class="md:flex md:justify-between md:items-center">
 
         <div>

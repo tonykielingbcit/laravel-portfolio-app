@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Str;
+use App\Models\Tag;
 use App\Models\Project;
 use App\Models\Category;
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
 
 class ProjectController extends Controller
 {
@@ -33,11 +34,20 @@ class ProjectController extends Controller
             // ->with('projects', $category->projects)
             // ->with('projects', $category->projects()->orderBy('published_date', 'asc')->get())
             ->with('projects', $category->projects()->orderBy('published_date', 'asc')->paginate(2)->withQueryString())
-            ->with("category", $category->name)
-            ->with('categoryName', $category->name);
+            ->with("category", $category->name);
+            // ->with('categoryName', $category->name);
     }
 
 
+    public function listByTag(Tag $tag)
+    {
+        return view('projects.index')
+            // ->with('projects', $category->projects)
+            // ->with('projects', $category->projects()->orderBy('published_date', 'asc')->get())
+            ->with('projects', $tag->projects()->orderBy('published_date', 'asc')->paginate(2)->withQueryString())
+            ->with("tag", $tag->name);
+            // ->with('tagName', $tag->name);
+    }
 
     public function about()
     {
@@ -111,7 +121,7 @@ class ProjectController extends Controller
         // Save updates to the DB
         $project->update($attributes);
         // Set a flash message
-        session()->flash('success','Project Created Successfully');
+        session()->flash('success','Project Updated Successfully');
 
         // Redirect to the Admin Dashboard
         return redirect('/admin/projects');
@@ -125,6 +135,14 @@ class ProjectController extends Controller
 
         // Redirect to the Admin Dashboard
         return redirect('/admin');
+    }
+
+
+    public function getProjectsJSON()
+    {
+        $projects = Project::with(['category','tags'])->get();
+        // $projects = Project::all();
+        return response()->json($projects);
     }
 }
 

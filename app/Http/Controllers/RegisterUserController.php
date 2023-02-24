@@ -14,7 +14,7 @@ class RegisterUserController extends Controller
     public function store() {
         $attributes = request()->validate([
             'name' => 'required',
-            'email' => ['required','email','unique:users,email'],
+            'email' => ['required','email','unique:users,email' . $user->id],
             'password' => ['required','min:8','confirmed'],
         ]);
 

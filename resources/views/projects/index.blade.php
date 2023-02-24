@@ -1,4 +1,4 @@
-@props(['project', 'category' => false, "showBackToProjects" => true, 'categoryName'])
+@props(['project', 'category' => false, "showBackToProjects" => true, "tag" => false])
 
 <x-layout>
     <x-slot name="content">
@@ -12,12 +12,16 @@
                 </div>
             @endif
 
-            @if ($category)
-                <div class="p-5 mt-5 bg-white overflow-hidden shadow sm:rounded-lg">
+            <div class="p-5 mt-5 bg-white overflow-hidden shadow sm:rounded-lg">
+                @if ($category)
                     <h3><b>{{ $category }}</b> Projects</h3>
-                </div>
-            @endif
-            
+                @elseif ($tag)
+                    <h3><b>{{ $tag }}</b> Projects</h3>
+                @else
+                    <h3>Projects</h3>
+                @endif
+            </div>
+
             <div class="mt-6 w-full">
                 <section class="grid grid-cols-1 md:grid-cols-2 gap-4 mr-8 ml-8 grid-items-center">
                     @foreach ($projects as $project)

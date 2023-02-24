@@ -19,8 +19,20 @@
     <footer class="mt-5">
         @if ($project->category)
             <a href="/categories/{{ $project->category->slug }}">
-                <span>Category: {{ $project->category->name }}</span>
+                <p><b>Category: </b> {{ $project->category->name }}</p>
             </a>
         @endif
+
+        @if (count($project->tags))
+            <p class="mr-1"><b>Tags: </b>
+                @foreach ($project->tags as $tag)
+                    <span class="mr-1">
+                        <a href="/tags/{{ $tag->slug }}">{{ $tag->name }}</a>
+                    </span>
+                @endforeach
+            </p>
+        @endif
     </footer>
+
+
 </div>

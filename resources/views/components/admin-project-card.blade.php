@@ -22,6 +22,26 @@
                     </a>
                 @endif
             </div>
+
+            @if (count($project->tags))
+                <p class="mr-1"><b>Tags: </b>
+                    @foreach ($project->tags as $tag)
+                        <span class="mr-1">
+                            <a href="/tags/{{ $tag->slug }}">{{ $tag->name }}</a>
+                        </span>
+                    @endforeach
+                </p>
+            @endif
+
+            {{-- @if (count($project->tags))
+                <div>
+                    <span>Tags: {{ $tag->name }}</span>
+                        @foreach ($project->tags as $tag)
+                            <a class="mr-2" href="/tags/{{ $tag->slug }}">
+                        </a>
+                    @endforeach
+                </div>
+            @endif --}}
         </div>
 
         <div class="w-2/3 flex flex-col justify-center">
