@@ -1,4 +1,5 @@
-@props(['project', "users", 'category' => false, "showBackToProjects" => true])
+@props(['project', "users", 'category' => false, "showBackToProjects" => true, "flagEdit" => false])
+{{-- @props(['project', "users", "showBackToProjects" => true]) --}}
 
 <x-layout>
     <x-slot name="content">
@@ -26,8 +27,10 @@
                 </div>
                 <div class="mb-4 w-10/12 ">
                     <label for="excerpt" class="block mb-1 uppercase font-bold text-xs text-[#F5DEB3]">Excerpt</label>
-                    <textarea rows="2" name="excerpt" id="excerpt" required placeholder="Short Description" class="border border-gray-400 rounded p-2 w-full">
-{{ old('excerpt') ?? $project?->excerpt }}</textarea>
+                    <textarea rows="2" name="excerpt" id="excerpt" required placeholder="Short Description" 
+                    class="border border-gray-400 rounded p-2 w-full">
+                        {{ old('excerpt') ?? $project?->excerpt }}
+                    </textarea>
                     @error('excerpt')
                         <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                     @enderror
@@ -75,20 +78,49 @@
                       <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                     @enderror
                   </div>
-                <div class="mb-4 flex justify-center">
-                    <select name="category_id" id="category_id" class="w-64">
+
+                <div class="m-4 flex justify-center">
+                    <select name="category_id" id="category_id" class="w-64 text-center py-1 rounded-md">
                         <option value="" selected disabled>Select a Category</option>
                         <option value="">None</option>
                         @foreach ($categories as $category)
                             <option value="{{ $category->id ?? $project?->category_id }}" 
-                                @if ($category->id == old('category_id')) selected @endif>
-                                {{ $category->name }}</option>
+                                {{-- @if ($category->id == old('category_id')) 
+                                    selected 
+                                @endif --}}
+                                {{ $category->id == old('category_id') ? 'selected' : ($project ? ($category->id == $project->category_id ? 'selected' : '') : '') }}
+                            >
+                                {{ $category->name }}
+                            </option>
                         @endforeach
                     </select>
                 </div>
-                <div class="mb-6 flex justify-center">
-                    <button type="submit" class="bg-green-700 text-white rounded py-2 px-4 hover:bg-green-600">Submit</button>
-                  </div>
+                
+                <h2 class="text-center font-bold text-2xl text-gray-400 mt-4">Check Tags</h2>
+                <div class="flex flex-wrap mb-6">
+                    @foreach ($tags as $tag)
+                        <label class="px-4 text-gray-400">
+                            <input type="checkbox" name="tags[]" id="tags" value="{{ $tag->id }}"
+                                @if (old('tags') && in_array($tag->id, old('tags')))
+                                        checked
+                                @elseif ($project && $project->tags)
+                                    @foreach ($project->tags as $projectTag)
+                                        @if ($tag->id == $projectTag->id)
+                                            checked
+                                        @endif
+                                    @endforeach
+                                @endif
+                            >
+                            {{$tag['name']}}
+                        </label>
+                    @endforeach
+                </div>
+
+                <div class="mb-6 flex justify-center w-40">
+                    <button type="submit" class="w-full bg-green-700 text-white rounded py-2 px-4 hover:bg-green-600">
+                        {{ $flagEdit ? "Save" : "Submit"}}
+                    </button>
+                </div>
             </form>
 
         </div>

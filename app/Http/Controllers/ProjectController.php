@@ -51,7 +51,7 @@ class ProjectController extends Controller
 
     public function about()
     {
-        $about= "This is About page";
+        $about= "This is About page!";
         return view('projects.about', ['about' => $about]);
     }
 
@@ -60,10 +60,12 @@ class ProjectController extends Controller
     public function create() {
         return view('admin.projects.create')
             ->with("project", null)
-            ->with('categories', Category::all());
+            ->with('categories', Category::all())
+            ->with('tags', Tag::all());
     }
 
-    public function store(Project $project, Request $request) {
+    // public function store(Project $project, Request $request) {
+    public function store(Request $request) {
         $attributes = request()->validate([
             'title' => 'required',
             'excerpt' => 'required',
@@ -81,8 +83,12 @@ class ProjectController extends Controller
         $attributes['image'] = $image_path;
         $thumb_path = $request->file('thumb')?->storeAs('images', $request->thumb->getClientOriginalName(), 'public');
         $attributes['thumb'] = $thumb_path;
+
         
-        Project::create($attributes);
+        $project = Project::create($attributes);
+        
+        $tags = $request->input('tags');
+        $project->tags()->attach($tags);
 
         // Set a flash message
         session()->flash('success','Project Created Successfully');
@@ -96,7 +102,9 @@ class ProjectController extends Controller
     public function edit(Project $project) {
         return view('admin.projects.create')
             ->with('project', $project)
-            ->with('categories', Category::all());
+            ->with('categories', Category::all())
+            ->with('tags', Tag::all())
+            ->with('flagEdit', true);
     }
 
     public function update(Project $project, Request $request) {
@@ -109,6 +117,7 @@ class ProjectController extends Controller
             'category_id' => ['nullable','sometimes','exists:categories,id'],
             'image' => ['nullable','sometimes','image','mimes:jpg,png,jpeg,gif,svg','max:2048','dimensions:max_width=1200'],
             'thumb' => ['nullable','sometimes','image','mimes:jpg,png,jpeg,gif,svg','max:1024','dimensions:max_width=600'],
+            // 'tags' => ['nullable','sometimes','tags'],
         ]);
         $attributes['slug'] = Str::slug($attributes['title']);
 
@@ -117,6 +126,10 @@ class ProjectController extends Controller
         $attributes['image'] = $image_path;
         $thumb_path = $request->file('thumb')?->storeAs('images', $request->thumb->getClientOriginalName(), 'public');
         $attributes['thumb'] = $thumb_path;
+
+        // ddd("checking data: ", $project);
+        $tags = $request->input('tags');
+        $project->tags()->sync($tags);
 
         // Save updates to the DB
         $project->update($attributes);

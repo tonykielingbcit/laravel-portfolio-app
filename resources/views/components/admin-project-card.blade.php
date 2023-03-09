@@ -12,7 +12,9 @@
             <div>
                 <div class="flex justify-center pt-8">
                     @php($temp = $project->thumb ?? "images/thumb-default.png")
-                    <img src="{{ url('storage/'.$temp) }}" class="flex items-center justify-center w-1/2" />
+                    <a href="/admin/projects/{{ $project->slug }}">
+                        <img src="{{ url('storage/'.$temp) }}" class="flex items-center justify-center" />
+                    </a>
                 </div>
             </div>
             <div class="mt-8">

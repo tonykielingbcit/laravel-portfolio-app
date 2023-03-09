@@ -2,7 +2,7 @@
 
 <x-layout>
     <x-slot name="content">
-        <div class="relative flex flex-col items-center justify-center">
+        <div class="relative flex flex-col items-center justify-center mb-6">
 
             {{-- @if ($showBackToProjects) --}}
                 <div class="absolute top-6 left-6 text-[#F5DEB3]">
@@ -23,11 +23,27 @@
                     <img src="{{ url('storage/'.$temp) }}" class="flex items-center justify-center w-3/4" />
                 </div>
 
-                <div class="w-full flex flex-col justify-center [&>p]:pt-4 mt-8">
+                <div class="w-full flex flex-col justify-center [&>p]:pt-4 mt-8 p-8">
                     {!! $project->body !!}
                 </div>
 
-                </div>
+                <footer class="mt-2">
+                    @if ($project->category)
+                        <a href="/categories/{{ $project->category->slug }}">
+                            <p><b>Category: </b> {{ $project->category->name }}</p>
+                        </a>
+                    @endif
+            
+                    @if (count($project->tags))
+                        <p class="mr-1"><b>Tags: </b>
+                            @foreach ($project->tags as $tag)
+                                <span class="mr-1">
+                                    <a href="/tags/{{ $tag->slug }}">{{ $tag->name }}</a>
+                                </span>
+                            @endforeach
+                        </p>
+                    @endif
+                </footer>
             </div>
         </div>
     </x-slot>
