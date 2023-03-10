@@ -34,7 +34,8 @@ class Project extends Model
         'image',
         'thumb',
         'category_id',
-        'slug'
+        'slug',
+        'featured'
     ];
 }
 

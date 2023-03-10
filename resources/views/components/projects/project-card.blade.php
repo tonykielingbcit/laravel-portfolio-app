@@ -1,6 +1,10 @@
-@props(['project', 'showBody' => false, "isAdmin" => false])
+@props(['project', 'showBody' => false, "isAdmin" => false, 'featured' => false])
 
-<div class="p-6 m-6 bg-white overflow-hidden shadow rounded-lg flex flex-col justify-between">
+@if ($featured)
+    <div class="p-6 m-6 bg-lime-300 border-4 border-orange-500 overflow-hidden shadow rounded-lg flex flex-col justify-between">
+@else
+    <div class="p-6 m-6 bg-white overflow-hidden shadow rounded-lg flex flex-col justify-between">
+@endif
     <div>
         <div class="text-xl font-bold">
             <a href="/projects/{{ $project->slug }}">{{ $project->title }}</a>

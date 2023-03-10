@@ -60,6 +60,18 @@
                         <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                     @enderror
                 </div>
+
+                <div class="w-10/12 my-6 flex align-middle">
+                    <label for="featured" class="block mr-2 uppercase font-bold text-xs text-[#F5DEB3]">Featured</label>
+                    <input type="checkbox" name="featured" id="featured" 
+                        {{ $project->featured ? 'checked' : '' }}
+                        {{-- value="{{ $project->featured ?? old('featured') ?? checked }}"> --}}
+                        value="foo">
+                </div>
+
+
+
+
                 <div class="mb-4 w-10/12 ">
                     <label for="thumb" class="block mb-1 uppercase font-bold text-xs text-[#F5DEB3]">Thumbnail</label>
                     <input type="file" name="thumb" id="thumb"

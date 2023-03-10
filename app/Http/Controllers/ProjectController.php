@@ -17,7 +17,9 @@ class ProjectController extends Controller
         //     ->with("showBackToProjects", false);
 
         return view('projects.index')
-            ->with('projects', Project::latest('published_date')->paginate(4)->withQueryString())
+            // ->with('projects', Project::latest('published_date')->paginate(4)->withQueryString())
+            ->with('projects', Project::latest('published_date')->where('featured', false)->paginate(4)->withQueryString())
+            ->with('featured', Project::where('featured', true)->get())
             ->with('categoryName', null);
     }
 
@@ -67,6 +69,7 @@ class ProjectController extends Controller
     // public function store(Project $project, Request $request) {
     public function store(Request $request) {
         $attributes = request()->validate([
+            'featured' => ['sometimes'],
             'title' => 'required',
             'excerpt' => 'required',
             'body' => 'required',
@@ -84,6 +87,11 @@ class ProjectController extends Controller
         $thumb_path = $request->file('thumb')?->storeAs('images', $request->thumb->getClientOriginalName(), 'public');
         $attributes['thumb'] = $thumb_path;
 
+        if (!isset($attributes['featured'])) {
+            $attributes['featured'] = false;
+        } else {
+            $attributes['featured'] = true;
+        }
         
         $project = Project::create($attributes);
         
@@ -109,6 +117,7 @@ class ProjectController extends Controller
 
     public function update(Project $project, Request $request) {
         $attributes = request()->validate([
+            'featured' => ['sometimes'],
             'title' => ['required','unique:projects,title,'.$project->id],
             'excerpt' => 'required',
             'body' => 'required',
@@ -117,7 +126,6 @@ class ProjectController extends Controller
             'category_id' => ['nullable','sometimes','exists:categories,id'],
             'image' => ['nullable','sometimes','image','mimes:jpg,png,jpeg,gif,svg','max:2048','dimensions:max_width=1200'],
             'thumb' => ['nullable','sometimes','image','mimes:jpg,png,jpeg,gif,svg','max:1024','dimensions:max_width=600'],
-            // 'tags' => ['nullable','sometimes','tags'],
         ]);
         $attributes['slug'] = Str::slug($attributes['title']);
 
@@ -126,6 +134,15 @@ class ProjectController extends Controller
         $attributes['image'] = $image_path;
         $thumb_path = $request->file('thumb')?->storeAs('images', $request->thumb->getClientOriginalName(), 'public');
         $attributes['thumb'] = $thumb_path;
+
+        $project->featured = $request->input('featured', false);
+
+        
+        if (!isset($attributes['featured'])) {
+            $attributes['featured'] = false;
+        } else {
+            $attributes['featured'] = true;
+        }
 
         // ddd("checking data: ", $project);
         $tags = $request->input('tags');

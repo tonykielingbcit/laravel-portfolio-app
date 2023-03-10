@@ -20,7 +20,8 @@ class ProjectSeeder extends Seeder
             'slug' => 'portfolio-showcase',
             'excerpt' => fake()->sentences(2, true),
             'body' => $this->fakeHTMLParagraphs(4),
-            'category_id' => 3
+            'category_id' => 3,
+            'featured' => true
         ]);
         Project::create([
             'title' => 'SSD Yearbook',

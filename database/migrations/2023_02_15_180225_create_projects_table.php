@@ -23,6 +23,7 @@ return new class extends Migration
             $table->date('published_date')->nullable(true);
             $table->foreignId('category_id')->nullable(true);
             $table->timestamps();
+            $table->boolean('featured')->default(false);
         });
     }
 
