@@ -12,7 +12,7 @@
                 </div>
             @endif
 
-            <div class="p-5 mt-5 bg-white overflow-hidden shadow sm:rounded-lg">
+            <div class="p-5 mt-5 bg-white overflow-hidden shadow m-auto rounded-lg">
                 @if ($category)
                     <h3><b>{{ $category }}</b> Projects</h3>
                 @elseif ($tag)

@@ -1,6 +1,6 @@
 @props(['project', 'showBody' => false, "isAdmin" => false])
 
-<div class="p-6 m-6 bg-white overflow-hidden shadow sm:rounded-lg flex flex-col justify-between">
+<div class="p-6 m-6 bg-white overflow-hidden shadow rounded-lg flex flex-col justify-between">
     <div>
         <div class="text-xl font-bold">
             <a href="/projects/{{ $project->slug }}">{{ $project->title }}</a>
