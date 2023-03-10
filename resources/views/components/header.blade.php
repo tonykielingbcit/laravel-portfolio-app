@@ -1,5 +1,91 @@
 <style>
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* border: 1px solid red; */
+    }
+
+    body {
+        background: white;
+        width: 100%; */
+    }
+
+    .hamburger, .close {
+        border: none;
+        cursor: pointer;
+        /* position absolute position the icons relative to the body because they have no position relative parents*/
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        width: 36px;
+        height: 36px;
+    }
+
+    .hamburger {
+        /* background: lightcyan; */
+        border-radius: 8px;
+        display: flex;
+    }
+
+    .close {
+        /* background: black; */
+        background-color: rgb(55 65 81);
+    }
+
+    .hamburger img, .close img {
+        width: 100%;
+        height: 100%;
+    }
+
+    .navbar {
+        position: absolute;
+        /* a higher z-index put navbar above hamburger */
+        z-index: 1000;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        overflow: hidden;
+        /* basic menu styling*/
+        list-style: none;
+        /* background: black; */
+        background-color: rgb(55 65 81);
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: space-evenly;
+        align-items: center;
+        /* animate slide up/down */
+        transform: translateY(-100%);
+        transition: transform 0.2s ease;
+    }
+
+    /* :target is called when its anchor id #navbar is called by clicking on the hamburger which has href="#navbar" */
+
+    .navbar:target {
+        /* show navbar */
+        transform: translateY(0);
+    }
+
+    li a {
+        display: block;
+        font-family: 'Open Sans', sans-serif;
+        color: white;
+        font-weight: bold;
+        font-size: 1.2rem;
+        /* remove default underline and add our own with padding and border bottom */
+        text-decoration: none;
+        border-bottom: 1px solid black;
+        padding-bottom: 0.5rem;
+    }
+
+    li a:hover, li a:focus {
+        /* show border bottom */
+        border-bottom: 1px solid white;
+    }
 </style>
+{{-- https://dev.to/ljcdev/hamburger-css-no-js-2dfa --}}
+{{-- hamburguer menu reference --}}
 
 <header class="px-6 py-5 top-0 left-0 w-full border-12 border-b border-solid bg-gray-400">
     <nav class="md:flex md:justify-between md:items-center">
@@ -26,17 +112,62 @@
                 </div>
             </div>
 
-{{-- temp --}}
-
-
-
-            <div>
-                @auth
-                    <span class="text-m font-bold"> {{ auth()->user()->name }} </span>
-                @endauth
+            {{-- second hamburguer menu option --}}
+            {{-- it needs the style above, otherwise, need to comment it out --}}
+            <div class="md:hidden">
+                <ul class="navbar" id="navbar">
+                    <a href="/admin/projects" 
+                        class="block py-4 text-2xl w-full text-center font-bold text-gray-400 hover:bg-gray-400 hover:text-red-600">
+                            Projects
+                    </a>
+                    @auth
+                        @if (auth()->user()->isAdmin())
+                            <a href="/admin" 
+                                class="block py-4 text-2xl w-full text-center font-bold text-gray-400 hover:bg-gray-400 hover:text-red-600">
+                                    Admin
+                            </a>
+                        @endif
+                        <a href="/logout" 
+                            class="block py-4 text-2xl w-full text-center font-bold text-gray-400 hover:bg-gray-400 hover:text-red-600">
+                                Logout
+                        </a>
+                    @else
+                        <a href="/register" 
+                            class="block py-4 text-2xl w-full text-center font-bold text-gray-400 hover:bg-gray-400 hover:text-red-600">
+                                Register
+                        </a>
+                        <a href="/login" 
+                            class="block py-4 text-2xl w-full text-center font-bold text-gray-400 hover:bg-gray-400 hover:text-red-600">
+                                Log In
+                        </a>
+                    @endauth
+                    <a href="/about" 
+                        class="block py-4 text-2xl w-full text-center font-bold text-gray-400 hover:bg-gray-400 hover:text-red-600">
+                            About
+                    </a>
+                    <a class="close" href="#">
+                    <img src="https://ljc-dev.github.io/testing0/ham-close.svg" alt="close">
+                    </a>
+                </ul>
+                <a class="hamburger bg-gray-400" href="#navbar">
+                    <img src="https://ljc-dev.github.io/testing0/ham.svg" alt="menu">
+                </a>
             </div>
 
-            <div class="md:hidden flex">
+            
+            
+            <div>
+                @auth
+                <span class="text-m font-bold"> {{ auth()->user()->name }} </span>
+                @endauth
+            </div>
+            
+            {{-- need this for the second hamburguer menu, so it creates an element to position the name right in the center --}}
+            <div class="md:hidden text-transparent flex">1234567890</div>
+
+            {{-- first hamburguer menu option --}}
+            {{-- do not need the style on the very top --}}
+            {{-- <div class="md:hidden flex">
                 <div class="relative">
                   <button 
                     class="flex items-center px-3 py-2 text-gray-500 border border-gray-600 focus:outline-none"
@@ -65,7 +196,7 @@
                     <a href="/about" class="block px-3 py-2 text-gray-700 hover:bg-gray-400">About</a>
                   </div>
                 </div>
-              </div>  
+              </div>   --}}
         
 
 
