@@ -1,16 +1,34 @@
+<style>
+</style>
+
 <header class="px-6 py-5 top-0 left-0 w-full border-12 border-b border-solid bg-gray-400">
     <nav class="md:flex md:justify-between md:items-center">
 
         <div class="flex justify-between w-full">
-            <div class="flex">
-                <a href="/" class="text-xl font-bold uppercase">Home</a>
+            <div class="flex hover:cursor-pointer">
+                <a href="/">
+                    <span class="text-xl font-bold uppercase hover:bg-slate-300 p-2 rounded-md">
+                        Home
+                    </span>
+                </a>
 
-                {{-- <div class="sm:max-md:hidden flex align-middle ml-6" --}}
-                <div class="hidden md:flex align-middle ml-6 font-bold uppercase hover:cursor-pointer"
-                    <a href="/admin/projects" class="text-m font-bold uppercase ml-6">Projects</a>
-                    <a href="/about" class="text-m font-bold uppercase ml-6">About</a>
+                <div class="hidden md:flex align-middle ml-6 font-bold uppercase hover:cursor-pointer">
+                    <a href="/admin/projects">
+                        <span class="text-m font-bold ml-6 hover:bg-slate-300 p-2 rounded-md">
+                            Projects
+                        </span>
+                    </a>
+                    <a href="/about">
+                        <span class="text-m font-bold ml-6 hover:bg-slate-300 p-2 rounded-md">
+                            About
+                        </span>
+                    </a>
                 </div>
             </div>
+
+{{-- temp --}}
+
+
 
             <div>
                 @auth
@@ -48,26 +66,36 @@
                   </div>
                 </div>
               </div>  
-        {{-- </div> --}}
+        
 
 
             
-            <div class="hidden md:flex align-middle font-bold uppercase hover:cursor-pointer"
+            <div class="hidden md:flex align-middle font-bold uppercase hover:cursor-pointer">
                 @auth
-                    {{-- <span class="text-m font-bold uppercase"> {{ auth()->user()->name }} </span> --}}
-
                     @if (auth()->user()->isAdmin())
                         <a href="/admin"> 
-                            <span class="text-m font-bold ml-6 hover:bg-slate-300 p-2">
+                            <span class="text-m font-bold ml-6 hover:bg-slate-300 p-2 rounded-md">
                                 Admin
                             </span>
                         </a>
                     @endif
 
-                    <a href="/logout" class="ml-6 text-m font-bold uppercase">Logout</a>
+                    <a href="/logout">
+                        <span class="text-m font-bold ml-6 hover:bg-slate-300 p-2 rounded-md">
+                            Logout
+                        </span>
+                    </a>
                 @else
-                    <a href="/register" class="mr-6 text-m font-bold uppercase">Register</a>
-                    <a href="/login" class="text-m font-bold uppercase">Log In</a>
+                    <a href="/register">
+                        <span class="mr-6 text-m font-bold ml-6 hover:bg-slate-300 p-2 rounded-md uppercase">
+                            Register
+                        </span>
+                    </a>
+                    <a href="/login">
+                        <span class="text-m font-bold mr-6 hover:bg-slate-300 p-2 rounded-md uppercase">
+                            Log In
+                        </span>
+                    </a>
                 @endauth
 
             </div>

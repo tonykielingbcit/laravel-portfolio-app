@@ -1,6 +1,5 @@
 @props(['project', 'showBody' => false, "isAdmin" => false])
 
-{{-- <div class="p-6 m-6 bg-white overflow-hidden shadow sm:rounded-lg flex flex-col"> --}}
 <div class="w-full md:w-3/4 lg:w-1/2 bg-slate-300 rounded-lg m-3 p-4 flex flex-col">
     <div class="text-xl font-bold">
         <a href="/admin/projects/{{ $project->slug }}">{{ $project->title }}</a>
@@ -12,8 +11,8 @@
             <div>
                 <div class="flex justify-center pt-8">
                     @php($temp = $project->thumb ?? "images/thumb-default.png")
-                    <a href="/admin/projects/{{ $project->slug }}">
-                        <img src="{{ url('storage/'.$temp) }}" class="flex items-center justify-center" />
+                    <a href="/admin/projects/{{ $project->slug }}" class="flex justify-center max-w-[50%]">
+                        <img src="{{ url('storage/'.$temp) }}" />
                     </a>
                 </div>
             </div>
@@ -35,15 +34,6 @@
                 </p>
             @endif
 
-            {{-- @if (count($project->tags))
-                <div>
-                    <span>Tags: {{ $tag->name }}</span>
-                        @foreach ($project->tags as $tag)
-                            <a class="mr-2" href="/tags/{{ $tag->slug }}">
-                        </a>
-                    @endforeach
-                </div>
-            @endif --}}
         </div>
 
         <div class="w-2/3 flex flex-col justify-center">

@@ -2,7 +2,7 @@
 
 <x-layout>
     <x-slot name="content">
-        <div class="relative flex flex-col flex-1 bg-gray-700 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
+        <div class="relative flex flex-col flex-1 bg-gray-700 dark:bg-gray-900 items-center py-4 sm:pt-0">
             {{-- @if ($showBackToProjects) --}}
             @if ($category)
                 <div class="absolute top-6 left-6 text-[#F5DEB3]">
@@ -12,7 +12,7 @@
                 </div>
             @endif
 
-            <div class="p-5 mt-5 bg-white overflow-hidden shadow m-auto rounded-lg">
+            <div class="p-5 mt-8 bg-white overflow-hidden shadow rounded-lg text-center w-48 font-bold text-2xl">
                 @if ($category)
                     <h3><b>{{ $category }}</b> Projects</h3>
                 @elseif ($tag)
